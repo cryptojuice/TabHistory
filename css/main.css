@@ -1,10 +1,10 @@
 body{
-    height: 400px;
+    height: 300px;
     width: 700px;
     padding-top: 50px;
 }
 
 #myModal .modal-dialog
 {
-  width: 600px;/* your width */
+  /*width: 600px;*/
 }
