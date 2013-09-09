@@ -16,6 +16,10 @@
     "default_icon": "img/freezetabs.png",
     "default_popup": "tabhistory.html"
   },
+  "background": {
+      "page": "tabhistory.html",
+      "persistent": false
+  },
 
   "author": "Nick Robinson"
 }
