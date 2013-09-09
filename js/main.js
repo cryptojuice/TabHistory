@@ -12,13 +12,17 @@ $('#myModal').on('hidden.bs.modal', function () {
     $(this).removeData('bs.modal');
 });
 
+$(document.body).on('hover', '#tablist', function(){
+    $(this).toggleClass('active');
+});
+
 $(document.body).on('click', '#displayModal', function(){
     $('#myModal').modal('show');
     $('.modal-body').empty();
     var key = $(this).context.value;
     var size = Object.keys(tabs[key].data).length;
     $('.modal-body').append(
-        '<table class="table-bordered table-condenced">'+
+        '<table class="table table-condenced">'+
         '<tbody id="tabcontent">'+
         '</tbody>'+
         '</table>'
@@ -77,7 +81,7 @@ displaySavedTabs = function(){
     $('#tabview').empty();
     for (var i=keys.length-1; i >= 0; i--){
         $('#tabview').append(
-                "<tr>"+
+                "<tr id='tablist'>"+
                 "<td id='editable' contenteditable='true' name='"+keys[i]+"'>"+tabs[keys[i]].th_description+"</td>"+
                 "<td class='tabname'>" + keys[i] + "</td>"+
                 "<td><div class='btn-group btn-group-xs'>"+
@@ -88,29 +92,15 @@ displaySavedTabs = function(){
                 );
     }
 
-    $('.tabname').hover(function(){
-        $(this).toggleClass('active');
-    });
-
     $('button').click(function(){
         var key = $(this).context.value;
-        if($(this).context.name == "remove"){
+        if($(this).attr('name') == "remove"){
             removeFromHistory(key);
-        } else if($(this).context.name == "restore"){
+        } else if($(this).attr('name') == "restore"){
             restoreTabs(key);
         }
     });
 
-//    $(document.body).on('click', '#displayModal', function(){
-//        $('#myModal').modal('show');
-//        $('.modal-body').empty();
-//        var key = $(this).context.name;
-//        var size = Object.keys(tabs[key].data).length;
-//
-//        for (var i=0; i < size; i++){
-//            $('.modal-body').append('<li>'+tabs[key].data[i].title+'</li>');
-//        }
-//    });
 };
 
 loadTabHistory = function() {
