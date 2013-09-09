@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "TabHistory",
-  "version": "0.1",
+  "version": "0.1.0",
 
   "permissions": [
           "tabs",
@@ -13,12 +13,12 @@
   "icons": {},
   "browser_action": {
     "default_title": "TabHistory",
-    "default_icon": "img/freezetabs.png",
-    "default_popup": "tabhistory.html"
+    "default_icon": "img/tabhistory.png",
+    "default_popup": "popup.html"
   },
-  "background": {
-      "page": "tabhistory.html",
-      "persistent": false
+
+  "background":{
+      "scripts":["js/background.js"]
   },
 
   "author": "Nick Robinson"
