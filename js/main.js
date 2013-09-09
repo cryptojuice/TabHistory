@@ -66,19 +66,9 @@ saveCurrentTabs = function(){
                     "favIconUrl":tab_array[i].favIconUrl,
                 };
         }
-        tabs[key] = {"data": temp_tabs, "th_description":"click to edit"};
+        tabs[key] = {"data": temp_tabs, "th_description":"*click to edit"};
         chrome.storage.local.set({'tabs':tabs}, function(){console.log(key + ' saved');});
         displaySavedTabs();
-    });
-};
-
-closeAllTabs = function(){
-    chrome.tabs.query({}, function(tabs){
-        for(var i in tabs){
-            if (tabs[i].url != "chrome://newtab/"){
-                chrome.tabs.remove(tabs[i].id);
-            }
-        }
     });
 };
 
