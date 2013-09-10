@@ -1,14 +1,14 @@
 {
   "manifest_version": 2,
   "name": "TabHistory",
-  "version": "0.1.0",
+  "version": "0.1.1",
 
   "permissions": [
           "tabs",
           "storage"
       ],
 
-  "description": "Save/Restore Chrome Tabs",
+  "description": "Keep a History of your Tabs",
   "icons": {"16": "img/tabhistory_16.png","48": "img/tabhistory_48.png","128": "img/tabhistory_128.png"},
 
   "browser_action": {
