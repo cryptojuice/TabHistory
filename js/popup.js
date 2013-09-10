@@ -1,26 +1,18 @@
 var tabs = {};
 
-$('#saveButton').click(function(){
-    saveCurrentTabs();
-});
-
-$('#closeTabs').click(function(){
-    chrome.runtime.sendMessage({"closeTabs":true});
-});
-
-$('#myModal').on('hidden.bs.modal', function () {
-    $(this).removeData('bs.modal');
-});
 
 $(document.body).on('hover', '#tablist', function(){
-    $(this).toggleClass('active');
-});
 
-$(document.body).on('click', '#displayModal', function(){
+    $(this).toggleClass('active');
+
+}).on('click', '#displayModal', function(){
+
     $('#myModal').modal('show');
     $('.modal-body').empty();
-    var key = $(this).context.value;
+
+    var key = $(this).attr('value');
     var size = Object.keys(tabs[key].data).length;
+
     $('.modal-body').append(
         '<table class="table table-condenced">'+
         '<tbody id="tabcontent">'+
@@ -31,21 +23,45 @@ $(document.body).on('click', '#displayModal', function(){
     for (var i=0; i < size; i++){
         $('#tabcontent').append(
             '<tr>'+
-            '<td><img src="'+tabs[key].data[i].favIconUrl+'"</img></td>'+
-            '<td>'+tabs[key].data[i].title+'</td>'+
+            '<td><img class="favicon" src="'+tabs[key].data[i].favIconUrl+'"/></td>'+
+            '<td><small>'+tabs[key].data[i].title+'</small></td>'+
             '</tr>'
             );
     }
-});
 
-$(document.body).on('blue keyup paste', '#editable', function(){
+}).on('blue keyup paste', '#editable', function(){
+
     var key = $(this).attr('name');
     tabs[key].th_description = $(this).html();
+
     chrome.storage.local.set({'tabs':tabs}, function(){console.log(key + ' saved');});
+
+}).on('click', '#closeWindow', function(){
+
+    window.close();
+
+}).on('click', 'button', function(){
+
+    var key = $(this).attr('value');
+
+    if($(this).attr('name') == "remove"){
+        removeFromHistory(key);
+    } else if($(this).attr('name') == "restore"){
+        restoreTabs(key);
+    }
 });
 
-$(document.body).on('click', '#closeWindow', function(){
-    window.close();
+
+$('#saveButton').click(function(){
+    saveCurrentTabs();
+});
+
+$('#closeTabs').click(function(){
+    chrome.runtime.sendMessage({"closeTabs":true});
+});
+
+$('#myModal').on('hidden.bs.modal', function () {
+    $(this).removeData('bs.modal');
 });
 
 
@@ -91,16 +107,6 @@ displaySavedTabs = function(){
                 "</tr>"
                 );
     }
-
-    $('button').click(function(){
-        var key = $(this).context.value;
-        if($(this).attr('name') == "remove"){
-            removeFromHistory(key);
-        } else if($(this).attr('name') == "restore"){
-            restoreTabs(key);
-        }
-    });
-
 };
 
 loadTabHistory = function() {
@@ -122,5 +128,8 @@ removeFromHistory = function(key) {
     displaySavedTabs();
 };
 
+initialize = function (){
+    loadTabHistory();
+};
 
-loadTabHistory();
+initialize();

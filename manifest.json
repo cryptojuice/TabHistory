@@ -8,11 +8,9 @@
           "storage"
       ],
 
-  //"default_locale": "en",
-  "description": "Save currently opened tabs",
-  "icons": {"16": "img/tabhistory_16.png",
-            "48": "img/tabhistory_48.png",
-            "128": "img/tabhistory_128.png"},
+  "description": "Save/Restore Chrome Tabs",
+  "icons": {"16": "img/tabhistory_16.png","48": "img/tabhistory_48.png","128": "img/tabhistory_128.png"},
+
   "browser_action": {
     "default_title": "TabHistory",
     "default_icon": "img/tabhistory_16.png",

@@ -8,3 +8,8 @@ body{
 {
   /*width: 600px;*/
 }
+
+.favicon {
+    width:16px;
+    height:16px;
+}
